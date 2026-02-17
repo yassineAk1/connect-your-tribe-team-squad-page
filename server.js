@@ -18,9 +18,6 @@ app.set('views' , './views')
 
 app.use(express.urlencoded({extended: true}))
 
-  // Filter eerst de berichten die je wilt zien, net als bij personen
-  // Deze tabel wordt gedeeld door iedereen, dus verzin zelf een handig filter,
-  // bijvoorbeeld je teamnaam, je projectnaam, je person ID, de datum van vandaag, etc..
 const messageParams = {
     'filter[for]': `glowbounty`
     // 'sort': '-date_created' 
@@ -42,10 +39,39 @@ const personParams = {
 
   const messagesResponse = await fetch('https://fdnd.directus.app/items/messages?' + new URLSearchParams(messageParams))
   const messagesResponseJSON = await messagesResponse.json()
-// console.log(messagesResponseJSON)
+console.log(messagesResponseJSON)
 
 
 app.get('/', async function (request, response) {
+
+  // Filter eerst de berichten die je wilt zien, net als bij personen
+  // Deze tabel wordt gedeeld door iedereen, dus verzin zelf een handig filter,
+  // bijvoorbeeld je teamnaam, je projectnaam, je person ID, de datum van vandaag, etc..
+// const messageParams = {
+//     'filter[for]': `glowbounty`,
+//     'sort': '-date_created' 
+//   }
+
+//   const personParams = {
+//     'sort': 'name',
+//     'fields': '*,squads.*',
+//     'filter[squads][squad_id][tribe][name]': 'FDND Jaar 1',
+//     'filter[squads][squad_id][cohort]': '2526'
+//   }
+  
+  
+//   // Laat eventueel zien wat de filter URL is
+//   // (Let op: dit is _niet_ de console van je browser, maar van NodeJS, in je terminal)
+//   // console.log('API URL voor messages:', apiURL)
+//   const personResponse = await fetch('https://fdnd.directus.app/items/person/?' + new URLSearchParams(personParams))
+//   const personResponseJSON = await personResponse.json()
+
+//   const messagesResponse = await fetch('https://fdnd.directus.app/items/messages?' + new URLSearchParams(messageParams))
+//   const messagesResponseJSON = await messagesResponse.json()
+
+
+  // Controleer eventueel de data in je console
+  // console.log(messagesResponseJSON)
 
   // En render de view met de messages
   response.render('index.liquid', {
