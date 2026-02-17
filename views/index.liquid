@@ -3,6 +3,7 @@
 <a class="title" href="/">Wanted Wall</a>
 
 
+<aside>
 <details class="filters">
 <label for="squad-select">Kies een squad</label>
 <select name="squads" id="squad-select">
@@ -61,12 +62,12 @@
   <option value="Winter">Winter</option>
 </select>
 
-</details>
+</details></aside>
 
 <ul>
   {% for person in persons %}
     <li>
-      <a class="wantedPoster" loading="lazy" href="/student/{{ person.id }}" target="_blank">
+      <a class="wantedPoster" loading="lazy" href="/student/{{ person.id }}">
         <img class="poster" src="wantedposter.png" alt="">
         <img
           class="mugshot"
