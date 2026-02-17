@@ -18,18 +18,12 @@ app.set('views' , './views')
 
 app.use(express.urlencoded({extended: true}))
 
-
-app.get('/', async function (request, response) {
-
-  // Filter eerst de berichten die je wilt zien, net als bij personen
-  // Deze tabel wordt gedeeld door iedereen, dus verzin zelf een handig filter,
-  // bijvoorbeeld je teamnaam, je projectnaam, je person ID, de datum van vandaag, etc..
 const messageParams = {
-    'filter[for]': `Team ${teamName}`,
-    'sort': '-date_created' 
+    'filter[for]': `glowbounty`
+    // 'sort': '-date_created' 
   }
 
-  const personParams = {
+const personParams = {
     'sort': 'name',
     'fields': '*,squads.*',
     'filter[squads][squad_id][tribe][name]': 'FDND Jaar 1',
@@ -45,6 +39,35 @@ const messageParams = {
 
   const messagesResponse = await fetch('https://fdnd.directus.app/items/messages?' + new URLSearchParams(messageParams))
   const messagesResponseJSON = await messagesResponse.json()
+console.log(messagesResponseJSON)
+
+
+app.get('/', async function (request, response) {
+
+  // Filter eerst de berichten die je wilt zien, net als bij personen
+  // Deze tabel wordt gedeeld door iedereen, dus verzin zelf een handig filter,
+  // bijvoorbeeld je teamnaam, je projectnaam, je person ID, de datum van vandaag, etc..
+// const messageParams = {
+//     'filter[for]': `glowbounty`,
+//     'sort': '-date_created' 
+//   }
+
+//   const personParams = {
+//     'sort': 'name',
+//     'fields': '*,squads.*',
+//     'filter[squads][squad_id][tribe][name]': 'FDND Jaar 1',
+//     'filter[squads][squad_id][cohort]': '2526'
+//   }
+  
+  
+//   // Laat eventueel zien wat de filter URL is
+//   // (Let op: dit is _niet_ de console van je browser, maar van NodeJS, in je terminal)
+//   // console.log('API URL voor messages:', apiURL)
+//   const personResponse = await fetch('https://fdnd.directus.app/items/person/?' + new URLSearchParams(personParams))
+//   const personResponseJSON = await personResponse.json()
+
+//   const messagesResponse = await fetch('https://fdnd.directus.app/items/messages?' + new URLSearchParams(messageParams))
+//   const messagesResponseJSON = await messagesResponse.json()
 
 
   // Controleer eventueel de data in je console
@@ -64,13 +87,26 @@ app.get('/student/:id', async function (request, response) {
   const personDetailResponse = await fetch('https://fdnd.directus.app/items/person/' + request.params.id)
   // En haal daarvan de JSON op
   const personDetailResponseJSON = await personDetailResponse.json()
+
+  const messageIdParams = {
+    'filter[for]': `glowbounty`+ request.params.id
+    // 'sort': '-date_created' 
+  }
+
+  const messagesIdResponse = await fetch('https://fdnd.directus.app/items/messages?' + new URLSearchParams(messageIdParams))
+  const messagesIdResponseJSON = await messagesIdResponse.json()
   
   // Render student.liquid uit de views map en geef de opgehaalde data mee als variable, genaamd person
   // Geef ook de eerder opgehaalde squad data mee aan de view
-  response.render('student.liquid', {person: personDetailResponseJSON.data})
+  response.render('student.liquid', {
+    person: personDetailResponseJSON.data,
+    teamName: teamName,
+    messages: messagesResponseJSON.data,
+    messagesId: messagesIdResponseJSON.data,
+    persons: personResponseJSON.data})
 })
 
-app.post('/', async function (request, response) {
+app.post('/student/:id', async function (request, response) {
 
   // Stuur een POST request naar de messages tabel
   // Een POST request bevat ook extra parameters, naast een URL
@@ -82,10 +118,11 @@ app.post('/', async function (request, response) {
     // Geef de body mee als JSON string
     body: JSON.stringify({
       // Dit is zodat we ons bericht straks weer terug kunnen vinden met ons filter
-      for: `Team ${teamName}`,
+      for: `glowbounty`+ request.params.id,
       // En dit zijn onze formuliervelden
       from: request.body.from,
-      text: request.body.text
+      text: 'accept bounty'
+
     }),
 
     // En vergeet deze HTTP headers niet: hiermee vertellen we de server dat we JSON doorsturen

@@ -3,7 +3,6 @@
 <a href="/" class="woodButton">Back</a>
 
 <article class="d-poster">
- 
   <div class="d-mugshot">
     <img src="{% if person.mugshot %}https://fdnd.directus.app/assets/{{ person.mugshot }}{% else %}/placeholder.png{% endif %}">
   </div>
@@ -12,18 +11,41 @@
   <div class="d-bounty">{{ person.id }}.000.000</div>
   <div class="d-nickname">{{ person.nickname }}</div>
   <div class="d-github">@{{ person.github_handle }}</div>
-<div class="d-bio">{% if person.bio %} {{ person.bio| truncate: 240 }}  {% else %} <p>Deze persoon is te lui geweest om een bio neer te zetten</p>{% endif %}</div>  
-<div class="d-hobby">{{ person.fav_hobby }}</div>
-<div class="d-emoji">{{ person.fav_emoji }}</div>
-<div class="d-season">{{ person.fav_season }}</div>
-<div class="d-animal">{{ person.fav_animal }}</div>
-<div class="d-movie">{{ person.fav_movie }}</div>
-
-
+  <div class="d-bio">
+    {% if person.bio %}
+      {{ person.bio | truncate: 240 }}
+    {% else %}
+      <p>Deze persoon is te lui geweest om een bio neer te zetten</p>
+    {% endif %}
+  </div>
+  <div class="d-hobby">{{ person.fav_hobby }}</div>
+  <div class="d-emoji">{{ person.fav_emoji }}</div>
+  <div class="d-season">{{ person.fav_season }}</div>
+  <div class="d-animal">{{ person.fav_animal }}</div>
+  <div class="d-movie">{{ person.fav_movie }}</div>
 
   <div class="d-profilecard">
     <a href="{{ person.profilecard }}">Visitekaartje</a>
+    {% comment %} glowbounty{{ person.id }} {% endcomment %}
   </div>
+
+  <h2>Accept bounty?</h2>
+  <form method="post" action="/student/{{ person.id }}">
+    <label>
+      Naam:
+      <input type="text" name="from" required>
+    </label>
+
+    <button type="submit">Accept</button>
+  </form>
 </article>
+
+<ul>
+  {% for message in messagesId %}
+    <li>
+      {{ message.from }} heeft deze bounty geaccepteerd
+    </li>
+  {% endfor %}
+</ul>
 
 {% render 'partials/foot.liquid', squads: squads %}
