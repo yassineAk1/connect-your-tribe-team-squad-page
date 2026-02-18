@@ -1,9 +1,8 @@
 {% render 'partials/head.liquid' %}
 
-<a class="title" href="/">Wanted Wall</a>
+<a class="title" href="/"><span>WANTED WALL</span></a>
 
-
-<aside>
+<aside class="filters-wrapper">
 
 <form action="/" method="GET" class="search-form">
   <input type="text" name="q" placeholder="Search by name..." value="{{ searchTerm }}">
@@ -11,66 +10,74 @@
   <a href="/">Clear</a>
 </form>
 
-<details class="filters">
-<label for="squad-select">Kies een squad</label>
-<select name="squads" id="squad-select">
-  <option value="1I&1J">1I & 1J</option>
-  <option value="1I">1I</option>
-  <option value="1J">1J</option>
+  <details class="filters">
+    <summary>Filter/Sorteer</summary>
+    <label
+      >Kies een squad
+      <select name="squads">
+        <option value="1I&1J">1I & 1J</option>
+        <option value="1I">1I</option>
+        <option value="1J">1J</option>
 
-</select>
+      </select>
+    </label>
 
-<label for="hobby-select">filter op hobby</label>
-<select name="hobby" id="hobby-select">
-<option value="">Alle hobby's</option>
-  <option value="Chillen">Chillen</option>
-  <option value="Coden">Coden</option>
-  <option value="Dammen">Dammen</option>
-  <option value="Festivals">Festivals</option>
-  <option value="Fitness">Fitness</option>
-  <option value="Gamen">Gamen</option>
-  <option value="Haken">Haken</option>
-  <option value="Lezen">Lezen</option>
-  <option value="Muziek">Muziek</option>
-  <option value="Schaken">Schaken</option>
-  <option value="Sporten">Sporten</option>
-  <option value="Uitgaan">Uitgaan</option>
-</select>
+    <label
+      >Filter op hobby
+      <select name="hobby">
+        <option value="">Alle hobby's</option>
+        <option value="Chillen">Chillen</option>
+        <option value="Coden">Coden</option>
+        <option value="Dammen">Dammen</option>
+        <option value="Festivals">Festivals</option>
+        <option value="Fitness">Fitness</option>
+        <option value="Gamen">Gamen</option>
+        <option value="Haken">Haken</option>
+        <option value="Lezen">Lezen</option>
+        <option value="Muziek">Muziek</option>
+        <option value="Schaken">Schaken</option>
+        <option value="Sporten">Sporten</option>
+        <option value="Uitgaan">Uitgaan</option>
+      </select>
+    </label>
 
-<label for="dier-select">Favoriete dier</label>
-<select name="dier" id="dier-select">
-  <option value="">alle dieren</option>
-  <option value="Aap">Aap</option>
-  <option value="Flamingo">Flamingo</option>
-  <option value="Giraffe">Giraffe</option>
-  <option value="Hommel">Hommel</option>
-  <option value="Hond">Hond</option>
-  <option value="Kat">Kat</option>
-  <option value="Koala">Koala</option>
-  <option value="Konijn">Konijn</option>
-  <option value="Leeuw">Leeuw</option>
-  <option value="Neushoorn">Neushoorn</option>
-  <option value="Nijlpaard">Nijlpaard</option>
-  <option value="Olifant">Olifant</option>
-  <option value="Panda">Panda</option>
-  <option value="Papegaai">Papegaai</option>
-  <option value="Pinguin">Pinguin</option>
-  <option value="Tijger">Tijger</option>
-  <option value="Vos">Vos</option>
-  <option value="Zebra">Zebra</option>
-</select>
+    <label
+      >Favoriete dier
+      <select name="dier">
+        <option value="">Alle dieren</option>
+        <option value="Aap">Aap</option>
+        <option value="Flamingo">Flamingo</option>
+        <option value="Giraffe">Giraffe</option>
+        <option value="Hommel">Hommel</option>
+        <option value="Hond">Hond</option>
+        <option value="Kat">Kat</option>
+        <option value="Koala">Koala</option>
+        <option value="Konijn">Konijn</option>
+        <option value="Leeuw">Leeuw</option>
+        <option value="Neushoorn">Neushoorn</option>
+        <option value="Nijlpaard">Nijlpaard</option>
+        <option value="Olifant">Olifant</option>
+        <option value="Panda">Panda</option>
+        <option value="Papegaai">Papegaai</option>
+        <option value="Pinguin">Pinguin</option>
+        <option value="Tijger">Tijger</option>
+        <option value="Vos">Vos</option>
+        <option value="Zebra">Zebra</option>
+      </select>
+    </label>
 
-
-<label for="seizoen-select">Favoriete seizoen</label>
-<select name="seizoen" id="seizoen-select">
-  <option value="">alle seizoenen</option>
-  <option value="Lente">Lente</option>
-  <option value="Zomer">Zomer</option>
-  <option value="Herfst">Herfst</option>
-  <option value="Winter">Winter</option>
-</select>
-
-</details></aside>
+    <label
+      >Favoriete seizoen
+      <select name="seizoen">
+        <option value="">Alle seizoenen</option>
+        <option value="Lente">Lente</option>
+        <option value="Zomer">Zomer</option>
+        <option value="Herfst">Herfst</option>
+        <option value="Winter">Winter</option>
+      </select>
+    </label>
+  </details>
+</aside>
 
 <ul>
   {% for person in persons %}
@@ -79,11 +86,18 @@
         <img class="poster" src="wantedposter.png" alt="">
         <img
           class="mugshot"
-          src="{% if person.mugshot %}https://fdnd.directus.app/assets/{{ person.mugshot }}{% else %}placeholder.png{% endif %}"
+          src="{% if person.mugshot %}https://fdnd.directus.app/assets/{{ person.mugshot }}{% elsif person.avatar %}{{ person.avatar }}{% else %}placeholder.png{% endif %}"
           alt="{{ person.name }}"
         >
         <p class="name">{{ person.name }}</p>
         <p class="bounty">{{ person.id }}.000.000</p>
+        <p class="emoji">
+          {% if person.fav_emoji.size > 0 and person.fav_emoji.size <= 10 %}
+            {{ person.fav_emoji }}
+          {% else %}
+            💩
+          {% endif %}
+        </p>
       </a>
     </li>
   {% endfor %}
