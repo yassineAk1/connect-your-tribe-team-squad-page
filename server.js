@@ -47,11 +47,36 @@ const personParams = {
 
 app.get('/', async function (request, response) {
 
-  // En render de view met de messages
+  // check if search query in URL"
+  const searchTerm = request.query.q;
+
+  // filters voor search
+  const personParams = {
+    'sort': 'name',
+    'fields': '*,squads.*',
+    'filter[squads][squad_id][tribe][name]': 'FDND Jaar 1',
+    'filter[squads][squad_id][cohort]': '2526'
+  }
+
+  // if searchbar has chars add to the filter
+  if(searchTerm) {
+    personParams['filter[name][_icontains]'] = searchTerm;
+  }
+
+  // fetch data in route
+  const personResponse = await fetch('https://fdnd.directus.app/items/person/?' + new URLSearchParams(personParams))
+  const personResponseJSON = await personResponse.json()
+
+  // // messages fetch
+  // const messagesResponse = await fetch('https://fdnd.directus.app/items/messages?' + new URLSearchParams(messageParams))
+  // const messagesResponseJSON = await messagesResponse.json()
+
+  // En render de view met de messages+search
   response.render('index.liquid', {
     teamName: teamName,
     messages: messagesResponseJSON.data,
-    persons: personResponseJSON.data
+    persons: personResponseJSON.data,
+    searchTerm: searchTerm
   })
 })
 
@@ -107,7 +132,7 @@ app.post('/student/:id', async function (request, response) {
   });
 
   // Stuur de browser daarna weer naar de homepage
-  response.redirect(303, '/')
+  response.redirect(303, `/student/${request.params.id}`)
 })
 
 

@@ -4,10 +4,10 @@
   "description": "Ontwerp en maak samen met je team een website met NodeJS, Express, JSON en Liquid",
   "main": "server.js",
   "type": "module",
-"scripts": {
-  "start": "nodemon server.js",
-  "dev": "browser-sync start --proxy localhost:8000 --files '**/*.liquid, **/*.css, **/*.js'"
-},
+  "scripts": {
+    "start": "nodemon server.js",
+    "dev": "browser-sync start --proxy localhost:8000 --files '**/*.liquid, **/*.css, **/*.js'"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/fdnd-task/connect-your-tribe-team-squad-page.git"
