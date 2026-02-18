@@ -4,12 +4,20 @@
 
 
 <aside>
+
+<form action="/" method="GET" class="search-form">
+  <input type="text" name="q" placeholder="Search by name..." value="{{ searchTerm }}">
+  <button type="submit">Search</button>
+  <a href="/">Clear</a>
+</form>
+
 <details class="filters">
 <label for="squad-select">Kies een squad</label>
 <select name="squads" id="squad-select">
   <option value="1I&1J">1I & 1J</option>
   <option value="1I">1I</option>
   <option value="1J">1J</option>
+
 </select>
 
 <label for="hobby-select">filter op hobby</label>
