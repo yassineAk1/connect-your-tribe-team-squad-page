@@ -3,6 +3,13 @@
 <a class="title" href="/"><span>WANTED WALL</span></a>
 
 <aside class="filters-wrapper">
+
+<form action="/" method="GET" class="search-form">
+  <input type="text" name="q" placeholder="Search by name..." value="{{ searchTerm }}">
+  <button type="submit">Search</button>
+  <a href="/">Clear</a>
+</form>
+
   <details class="filters">
     <summary>Filter/Sorteer</summary>
     <label
@@ -11,6 +18,7 @@
         <option value="1I&1J">1I & 1J</option>
         <option value="1I">1I</option>
         <option value="1J">1J</option>
+
       </select>
     </label>
 
