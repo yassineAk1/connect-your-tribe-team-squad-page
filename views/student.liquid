@@ -1,55 +1,61 @@
 {% render 'partials/head.liquid', title: 'Squad page' %}
+<main>
+  <a href="/" class="woodButton">Back</a>
 
-<a href="/" class="woodButton">Back</a>
+  <article class="d-poster">
+    <div class="d-mugshot">
+      <img src="{% if person.mugshot %}https://fdnd.directus.app/assets/{{ person.mugshot }}{% else %}/placeholder.png{% endif %}">
+    </div>
 
-<article class="d-poster">
-  <div class="d-mugshot">
-    <img src="{% if person.mugshot %}https://fdnd.directus.app/assets/{{ person.mugshot }}{% else %}/placeholder.png{% endif %}">
-  </div>
+    <ul>
+      <li class="d-name">{{ person.name }}</li>
+      <li class="d-bounty">{{ person.id }}.000.000</li>
+      <li class="d-nickname">{{ person.nickname }}</li>
+      <li class="d-github">@{{ person.github_handle }}</li>
+      <li class="d-bio">
+        {% if person.bio %}
+          {{ person.bio | truncate: 240 }}
+        {% else %}
+          <p>Deze persoon is te lui geweest om een bio neer te zetten</p>
+        {% endif %}
+      </li>
+      <li class="d-hobby">{{ person.fav_hobby }}</li>
+      <li class="d-emoji">
+        {% if person.fav_emoji.size > 0 and person.fav_emoji.size <= 10 %}
+          {{ person.fav_emoji }}
+        {% else %}
+          📌
+        {% endif %}
+      </li>
+      <li class="d-season">{{ person.fav_season }}</li>
+      <li class="d-animal">{{ person.fav_animal }}</li>
+      <li class="d-movie">{{ person.fav_movie }}</li>
+    </ul>
 
-  <ul>
-    <li class="d-name">{{ person.name }}</li>
-    <li class="d-bounty">{{ person.id }}.000.000</li>
-    <li class="d-nickname">{{ person.nickname }}</li>
-    <li class="d-github">@{{ person.github_handle }}</li>
-    <li class="d-bio">
-      {% if person.bio %}
-        {{ person.bio | truncate: 240 }}
-      {% else %}
-        <p>Deze persoon is te lui geweest om een bio neer te zetten</p>
-      {% endif %}
-    </li>
-    <li class="d-hobby">{{ person.fav_hobby }}</li>
-    <li class="d-emoji">{{ person.fav_emoji }}</li>
-    <li class="d-season">{{ person.fav_season }}</li>
-    <li class="d-animal">{{ person.fav_animal }}</li>
-    <li class="d-movie">{{ person.fav_movie }}</li>
-  </ul>
+    <div class="bounty-form">
+      <h2>Accepteer bounty?</h2>
+      <form method="post" action="/student/{{ person.id }}">
+        <label>
+          Naam:
+          <input type="text" name="from" required>
+        </label>
 
-  <div>
-    <h2>Accepteer bounty?</h2>
-    <form method="post" action="/student/{{ person.id }}">
-      <label>
-        Naam:
-        <input type="text" name="from" required>
-      </label>
-
-      <button type="submit">Accepteer</button>
-    </form>
-  </div>
-</article>
-
-{% for message in messagesId %}
-  <article>
-    <span class="pin">
-      {% if person.fav_emoji.size > 0 and person.fav_emoji.size <= 10 %}
-        {{ person.fav_emoji }}
-      {% else %}
-        📌
-      {% endif %}
-    </span>
-    <p>{{ message.from }} heeft deze bounty geaccepteerd</p>
+        <button type="submit">Accepteer</button>
+      </form>
+    </div>
   </article>
-{% endfor %}
 
+  {% for message in messagesId %}
+    <article class=d-messages>
+      <span class="pin">
+        {% if person.fav_emoji.size > 0 and person.fav_emoji.size <= 10 %}
+          {{ person.fav_emoji }}
+        {% else %}
+          📌
+        {% endif %}
+      </span>
+      <p>{{ message.from }} heeft deze bounty geaccepteerd</p>
+    </article>
+  {% endfor %}
+</main>
 {% render 'partials/foot.liquid', squads: squads %}
