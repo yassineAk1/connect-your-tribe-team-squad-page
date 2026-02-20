@@ -50,6 +50,17 @@ app.get('/', async function (request, response) {
   // check if search query in URL"
   const searchTerm = request.query.q;
 
+  const squad = request.query.squad
+
+const hobby = request.query.fav_hobby
+
+const sort = request.query.sort
+
+const animal = request.query.fav_animal
+
+const season = request.query.fav_season
+
+
   // filters voor search
   const personParams = {
     'sort': 'name',
@@ -62,6 +73,33 @@ app.get('/', async function (request, response) {
   if(searchTerm) {
     personParams['filter[name][_icontains]'] = searchTerm;
   }
+
+    if (squad) {
+    personParams['filter[squads][squad_id][name]'] = squad;
+  }
+
+    if (hobby) {
+  personParams['filter[fav_hobby]'] = hobby;
+}
+
+    if (animal) {
+  personParams['filter[fav_animal]'] = animal;
+}
+
+    if (season) {
+  personParams['filter[fav_season]'] = season;
+}
+
+if (sort == '-id') {
+  personParams['sort'] = '-id' 
+}
+if (sort == 'id') {
+  personParams['sort'] = 'id' 
+}
+
+if (sort == '-za') {
+  personParams['sort'] = '-name' 
+}
 
   // fetch data in route
   const personResponse = await fetch('https://fdnd.directus.app/items/person/?' + new URLSearchParams(personParams))
@@ -76,7 +114,12 @@ app.get('/', async function (request, response) {
     teamName: teamName,
     messages: messagesResponseJSON.data,
     persons: personResponseJSON.data,
-    searchTerm: searchTerm
+    searchTerm: searchTerm,
+    squad: squad,
+    fav_hobby: hobby,
+    fav_animal: animal,
+    fav_season: season,
+    sort: sort
   })
 })
 

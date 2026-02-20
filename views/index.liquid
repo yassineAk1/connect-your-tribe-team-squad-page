@@ -2,81 +2,99 @@
 
 <a class="title" href="/"><span>WANTED WALL</span></a>
 
+<div class="form-wrapper">
+  <form action="/" method="GET" class="search-form">
+    <input type="text" name="q" placeholder="Search by name..." value="{{ searchTerm }}">
+    <button class="search-button" type="submit"><span>Search</span></button>
+    <a class="clear-button" href="/"><span>Clear</span></a>
+  </form>
+</div>
+
 <aside class="filters-wrapper">
+  <form action="/" method="GET" class="filter-form">
+    <details class="filters">
+      <summary>FILTER/SORTEER</summary>
+      <label>
+        Kies een squad
+        <select name="squad">
+          <option value="" {% if not squad %}selected{% endif %}>1I & 1J</option>
+          <option value="1I" {% if squad == "1I" %}selected{% endif %}>1I</option>
+          <option value="1J" {% if squad == "1J" %}selected{% endif %}>1J</option>
+        </select>
+      </label>
 
-<form action="/" method="GET" class="search-form">
-  <input type="text" name="q" placeholder="Search by name..." value="{{ searchTerm }}">
-  <button type="submit">Search</button>
-  <a href="/">Clear</a>
-</form>
+      <label>
+        Sorteer
+        <select name="sort">
+          <option value="" {% if not sort %}selected{% endif %}>A - Z</option>
+          <option value="-za" {% if sort == "-za" %}selected{% endif %}>Z - A</option>
+          <option value="id" {% if sort == "id" %}selected{% endif %}>laag$ - hoog$</option>
+          <option value="-id" {% if sort == "-id" %}selected{% endif %}>hoog$ - laag$</option>
+        </select>
+      </label>
 
-  <details class="filters">
-    <summary>Filter/Sorteer</summary>
-    <label
-      >Kies een squad
-      <select name="squads">
-        <option value="1I&1J">1I & 1J</option>
-        <option value="1I">1I</option>
-        <option value="1J">1J</option>
+      <label>
+        Hobby
+        <select name="fav_hobby">
+          <option value="" {% if not fav_hobby %}selected{% endif %}>Alle hobby's</option>
+          <option value="Chillen" {% if fav_hobby == "Chillen" %}selected{% endif %}>Chillen</option>
+          <option value="Coden" {% if fav_hobby == "Coden" %}selected{% endif %}>Coden</option>
+          <option value="Dammen" {% if fav_hobby == "Dammen" %}selected{% endif %}>Dammen</option>
+          <option value="Festivals" {% if fav_hobby == "Festivals" %}selected{% endif %}>Festivals</option>
+          <option value="Fitness" {% if fav_hobby == "Fitness" %}selected{% endif %}>Fitness</option>
+          <option value="Gamen" {% if fav_hobby == "Gamen" %}selected{% endif %}>Gamen</option>
+          <option value="Haken" {% if fav_hobby == "Haken" %}selected{% endif %}>Haken</option>
+          <option value="Lezen" {% if fav_hobby == "Lezen" %}selected{% endif %}>Lezen</option>
+          <option value="Muziek" {% if fav_hobby == "Muziek" %}selected{% endif %}>Muziek</option>
+          <option value="Schaken" {% if fav_hobby == "Schaken" %}selected{% endif %}>Schaken</option>
+          <option value="Sporten" {% if fav_hobby == "Sporten" %}selected{% endif %}>Sporten</option>
+          <option value="Uitgaan" {% if fav_hobby == "Uitgaan" %}selected{% endif %}>Uitgaan</option>
+        </select>
+      </label>
 
-      </select>
-    </label>
+      <label>
+        Dier
+        <select name="fav_animal">
+          <option value="" {% if not fav_animal %}selected{% endif %}>Alle dieren</option>
+          <option value="Aap" {% if fav_animal == "Aap" %}selected{% endif %}>Aap</option>
+          <option value="Flamingo" {% if fav_animal == "Flamingo" %}selected{% endif %}>Flamingo</option>
+          <option value="Giraffe" {% if fav_animal == "Giraffe" %}selected{% endif %}>Giraffe</option>
+          <option value="Hommel" {% if fav_animal == "Hommel" %}selected{% endif %}>Hommel</option>
+          <option value="Hond" {% if fav_animal == "Hond" %}selected{% endif %}>Hond</option>
+          <option value="Kat" {% if fav_animal == "Kat" %}selected{% endif %}>Kat</option>
+          <option value="Koala" {% if fav_animal == "Koala" %}selected{% endif %}>Koala</option>
+          <option value="Konijn" {% if fav_animal == "Konijn" %}selected{% endif %}>Konijn</option>
+          <option value="Leeuw" {% if fav_animal == "Leeuw" %}selected{% endif %}>Leeuw</option>
+          <option value="Neushoorn" {% if fav_animal == "Neushoorn" %}selected{% endif %}>Neushoorn</option>
+          <option value="Nijlpaard" {% if fav_animal == "Nijlpaard" %}selected{% endif %}>Nijlpaard</option>
+          <option value="Olifant" {% if fav_animal == "Olifant" %}selected{% endif %}>Olifant</option>
+          <option value="Panda" {% if fav_animal == "Panda" %}selected{% endif %}>Panda</option>
+          <option value="Papegaai" {% if fav_animal == "Papegaai" %}selected{% endif %}>Papegaai</option>
+          <option value="Pinguin" {% if fav_animal == "Pinguin" %}selected{% endif %}>Pinguin</option>
+          <option value="Tijger" {% if fav_animal == "Tijger" %}selected{% endif %}>Tijger</option>
+          <option value="Vos" {% if fav_animal == "Vos" %}selected{% endif %}>Vos</option>
+          <option value="Zebra" {% if fav_animal == "Zebra" %}selected{% endif %}>Zebra</option>
+        </select>
+      </label>
 
-    <label
-      >Filter op hobby
-      <select name="hobby">
-        <option value="">Alle hobby's</option>
-        <option value="Chillen">Chillen</option>
-        <option value="Coden">Coden</option>
-        <option value="Dammen">Dammen</option>
-        <option value="Festivals">Festivals</option>
-        <option value="Fitness">Fitness</option>
-        <option value="Gamen">Gamen</option>
-        <option value="Haken">Haken</option>
-        <option value="Lezen">Lezen</option>
-        <option value="Muziek">Muziek</option>
-        <option value="Schaken">Schaken</option>
-        <option value="Sporten">Sporten</option>
-        <option value="Uitgaan">Uitgaan</option>
-      </select>
-    </label>
+      <label>
+        Seizoen
+        <select name="fav_season">
+          <option value="" {% if not fav_season %}selected{% endif %}>Alle seizoenen</option>
+          <option value="Lente" {% if fav_season == "Lente" %}selected{% endif %}>Lente</option>
+          <option value="Zomer" {% if fav_season == "Zomer" %}selected{% endif %}>Zomer</option>
+          <option value="Herfst" {% if fav_season == "Herfst" %}selected{% endif %}>Herfst</option>
+          <option value="Winter" {% if fav_season == "Winter" %}selected{% endif %}>Winter</option>
+        </select>
+      </label>
 
-    <label
-      >Favoriete dier
-      <select name="dier">
-        <option value="">Alle dieren</option>
-        <option value="Aap">Aap</option>
-        <option value="Flamingo">Flamingo</option>
-        <option value="Giraffe">Giraffe</option>
-        <option value="Hommel">Hommel</option>
-        <option value="Hond">Hond</option>
-        <option value="Kat">Kat</option>
-        <option value="Koala">Koala</option>
-        <option value="Konijn">Konijn</option>
-        <option value="Leeuw">Leeuw</option>
-        <option value="Neushoorn">Neushoorn</option>
-        <option value="Nijlpaard">Nijlpaard</option>
-        <option value="Olifant">Olifant</option>
-        <option value="Panda">Panda</option>
-        <option value="Papegaai">Papegaai</option>
-        <option value="Pinguin">Pinguin</option>
-        <option value="Tijger">Tijger</option>
-        <option value="Vos">Vos</option>
-        <option value="Zebra">Zebra</option>
-      </select>
-    </label>
+      <div class="button-wrapper">
+      <button class="submit-button" type="submit">Pas filters toe</button>
 
-    <label
-      >Favoriete seizoen
-      <select name="seizoen">
-        <option value="">Alle seizoenen</option>
-        <option value="Lente">Lente</option>
-        <option value="Zomer">Zomer</option>
-        <option value="Herfst">Herfst</option>
-        <option value="Winter">Winter</option>
-      </select>
-    </label>
-  </details>
+      <a class="delete-button" href="/">Wissen</a>
+</div>
+    </details>
+  </form>
 </aside>
 
 <ul class="person">
@@ -84,11 +102,12 @@
     <li>
       <a class="wantedPoster" loading="lazy" href="/student/{{ person.id }}">
         <img class="poster" src="wantedposter.png" alt="">
-        <img
-          class="mugshot"
-          src="{% if person.mugshot %}https://fdnd.directus.app/assets/{{ person.mugshot }}{% elsif person.avatar %}{{ person.avatar }}{% else %}placeholder.png{% endif %}"
-          alt="{{ person.name }}"
-        >
+<img 
+  class="mugshot" loading="lazy"
+  src="{% if person.mugshot %}https://fdnd.directus.app/assets/{{ person.mugshot }}{% elsif person.avatar %}{{ person.avatar }}{% else %}placeholder.png{% endif %}" 
+  alt="{{ person.name }}"
+  onerror="this.src='placeholder.png';"
+>
         <p class="name">{{ person.name }}</p>
         <p class="bounty">{{ person.id }}.000.000</p>
         <p class="emoji">
@@ -100,7 +119,13 @@
         </p>
       </a>
     </li>
-  {% endfor %}
+           {% else %}
+             <div class="boom">
+              <p>THE END</p>
+                <video autoplay class="explosion-video">
+  <source src="boom3.webm" type="video/webm">
+</video></div>
+{% endfor %}
 </ul>
 
 {% render 'partials/foot.liquid' %}
