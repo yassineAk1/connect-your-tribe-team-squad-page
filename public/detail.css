@@ -135,7 +135,7 @@ main {
     position: absolute;
     top: 57%;
     left: 58%;
-    font-size: 1.6rem;
+    font-size: 1.2rem;
     font-weight: bold;
 }
 
@@ -228,14 +228,23 @@ main {
     @media (min-width: 990px) {
 
         margin-left: auto;
-        top: 0em;
+        top: 3em;
 
     }
 
     @media (min-width: 1080px) {
 
         width: 22.5em;
-        margin-left: 40em;
+        position: absolute;
+        right: 5em;
+
+    }
+
+    @media (min-width: 1155px) {
+
+        width: 22.5em;
+        position: absolute;
+        right: 10em;
 
     }
 
