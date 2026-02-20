@@ -1,139 +1,255 @@
-a.woodButton{
-    display: flex;
-    justify-content: center;
-    text-decoration: none;
-    font-weight: 900;
-    color: #583f03;
+
+main {
+    margin: 0;
+    min-height: 100vh;
+    color: #3d2817;
 }
 
-.d-mugshot {
+.woodButton {
     position: absolute;
-    top: 24.5%;
-    left: 52%;
-    aspect-ratio: 1/1;
-    width: 45%;
-    outline: 1.8cqi solid #583f03;
+    top: 1.5em;
+    left: 2em;
+    background: #b6844b;
+    padding: .6em 1.4em;
+    border-radius: .5em;
+    text-decoration: none;
+    color: #2b1a0a;
+    font-weight: bold;
+    box-shadow: 0 .2em .4em rgba(0, 0, 0, 0.25);
 
-    img {
-        display: block;
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
+    @media (min-width: 940px) {
+
+        position: sticky;
+
     }
-}
 
+}
 
 .d-poster {
-    box-shadow: 0 0 1em 1em #0006;
     position: relative;
-    aspect-ratio: 2/3;
-    width: 65%;
-    margin: auto;
+    top: 5em;
+    border-radius: .3em;
+    width: 100%;
+    aspect-ratio: 2 / 3;
+
     background-image: url('/detailposter.jpg');
     background-size: 100% 100%;
     background-repeat: no-repeat;
-    color: #3d2817;
-    font-weight: 600;
-    max-width: 1000px;
+
     container-type: size;
-    margin-block: 5rem;
+    box-shadow: .2rem .2rem 1rem black;
 
-    .d-name {
-        font-size: 4.5cqi;
-        position: absolute;
-        top: 23.2%;
-        left: 5%;
-    }
 
-    .d-nickname {
-        font-size: 5cqi;
-        position: absolute;
-        top: 26.9%;
-        left: 5%;
-    }
+    @media (min-width: 460px) {
 
-    .d-github {
-        font-size: 5cqi;
-        position: absolute;
-        top: 30.9%;
-        left: 5%;
-    }
 
-    .d-hobby {
-        font-size: 5cqi;
-        position: absolute;
-        top: 34.9%;
-        left: 5%;
-    }
-
-    .d-emoji {
-        font-size: 5cqi;
-        position: absolute;
-        top: 38%;
-        left: 5%;
-    }
-
-    .d-season {
-        font-size: 5cqi;
-        position: absolute;
-        top: 43%;
-        left: 5%;
-    }
-
-    .d-animal {
-        font-size: 5cqi;
-        position: absolute;
-        top: 47%;
-        left: 5%;
-    }
-
-    .d-movie {
-        font-size: 5cqi;
-        position: absolute;
-        top: 50.9%;
-        left: 5%;
-        width: 50cqi;
-    }
-
-    .d-bio {
-        font-size: 3cqi;
-        position: absolute;
-        top: 61.5%;
-        left: 7%;
-        line-height: 7.2cqi;
-        width: 85%;
-    }
-
-    .d-profilecard {
-        font-size: 6cqi;
-        font-weight: 700;
-        position: absolute;
-        top: 85.2%;
-        left: 32.5%;
-
-        a {
-            text-decoration: none;
-            color: #3d2817;
-
-        }
+        width: 26.875em;
+        top: 5em;
+        justify-self: center;
 
     }
 
-
-    .d-bounty {
-        position: absolute;
-        top: 57%;
-        left: 57%;
-        font-size: 6cqi;
-        font-weight: 700;
+    @media (min-width: 990px) {
+        position: fixed;
+        left: 8em;
+        justify-self: unset;
+        top: 2.5em;
 
     }
 }
 
 
-@media (max-width: 900px) {
-    .d-poster {
-        width: 100%;
-        aspect-ratio: 2/3;
+.d-mugshot {
+    position: absolute;
+    top: 24%;
+    left: 52%;
+    width: 38%;
+    aspect-ratio: 1/1;
+    outline: .2em solid #583f03;
+}
+
+.d-mugshot img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+
+.d-name,
+.d-nickname,
+.d-github,
+.d-hobby,
+.d-emoji,
+.d-season,
+.d-animal,
+.d-movie {
+    position: absolute;
+    left: 6%;
+    font-size: 4.5cqi;
+}
+
+.d-name {
+    top: 22%;
+}
+
+.d-nickname {
+    top: 26%;
+}
+
+.d-github {
+    top: 30%;
+}
+
+.d-hobby {
+    top: 34%;
+}
+
+.d-emoji {
+    top: 37%;
+}
+
+.d-season {
+    top: 42%;
+}
+
+.d-animal {
+    top: 46%;
+}
+
+.d-movie {
+    top: 50%;
+    width: 45%;
+}
+
+.d-bio {
+    position: absolute;
+    top: 64%;
+    left: 8%;
+    width: 82%;
+    font-size: 3cqi;
+    line-height: 7.2cqi;
+}
+
+
+.d-bounty {
+    position: absolute;
+    top: 57%;
+    left: 58%;
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+
+.d-poster::before {
+    content: "📌";
+    position: absolute;
+    top: -1em;
+    left: 50%;
+    transform: translateX(-50%) rotate(-10deg);
+    font-size: 1.75em;
+}
+
+
+.bounty-form {
+    
+    position: absolute;
+    bottom: 1em;
+    left: 1.5em;
+    width: max-content;
+    justify-items: center;
+    
+
+    h2 {
+        
+        font-size: 1em;
+        margin: 0;
+        padding-bottom: .5em;
+
+        @media (min-width: 450px){
+
+            font-size: 1.25em;
+        }
     }
+
+    input {
+        background: #b6844b;
+        border: none;
+        padding: .4em .6em;
+        border-radius: .5em;
+        width: 9em;
+    }
+
+    button {
+        margin-left: .6em;
+        padding: .4em .9em;
+        background: #b6844b;
+        border: none;
+        border-radius: .5em;
+        cursor: pointer;
+    }
+
+    @media (min-width: 450px) {
+
+        left: 3.5em;
+
+    }
+
+}
+
+.d-messages {
+
+    position: relative;
+    margin-top: 2em;
+    background: rgba(214, 188, 150, 0.95);
+    padding: 1em 1.4em;
+    border-radius: 1em;
+    box-shadow: 0 .5em 1.1em rgba(0, 0, 0, 0.25);
+    font-size: 1.125em;
+    top: 5em;
+
+
+    p {
+        margin: 0;
+    }
+
+    .pin {
+        position: absolute;
+        top: -1em;
+        left: 50%;
+        transform: translateX(-50%) rotate(-15deg);
+        font-size: 1.5em;
+    }
+
+    @media (min-width: 450px) {
+
+        justify-self: center;
+        width: 22.5em;
+    }
+
+    @media (min-width: 990px) {
+
+        margin-left: auto;
+        top: 3em;
+
+    }
+
+    @media (min-width: 1080px) {
+
+        width: 22.5em;
+        position: absolute;
+        right: 5em;
+
+    }
+
+    @media (min-width: 1155px) {
+
+        width: 22.5em;
+        position: absolute;
+        right: 10em;
+
+    }
+
+}
+
+.d-messages:first-child {
+    margin-top: 8em;
 }
