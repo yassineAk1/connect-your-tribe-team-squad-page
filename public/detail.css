@@ -46,7 +46,6 @@ main {
         width: 26.875em;
         top: 5em;
         justify-self: center;
-
     }
 
     @media (min-width: 990px) {
@@ -54,10 +53,8 @@ main {
         left: 8em;
         justify-self: unset;
         top: 2.5em;
-
     }
 }
-
 
 .d-mugshot {
     position: absolute;
@@ -65,13 +62,13 @@ main {
     left: 52%;
     width: 38%;
     aspect-ratio: 1/1;
-    outline: .2em solid #583f03;
 }
 
 .d-mugshot img {
     width: 100%;
     height: 100%;
     object-fit: cover;
+    outline: .2em solid #583f03;
 }
 
 
@@ -252,4 +249,16 @@ main {
 
 .d-messages:first-child {
     margin-top: 8em;
+}
+
+.accept,
+.woodButton{
+ font-family: 'Rye', serif;
+
+ &:hover{
+                text-decoration: underline;
+            text-shadow: 1px 1px 12px black;
+filter: contrast(1.2);
+transform: scale(1.1);
+ }
 }
